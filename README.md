@@ -1,0 +1,2 @@
+# amplify_appsync_mongodb_atlas_startup
+amplify_appsync_mongodb_atlas_startup
