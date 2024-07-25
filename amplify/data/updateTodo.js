@@ -1,3 +1,5 @@
+import {getConnectionDetails, getDataAPIHeaders, getUserDocumentFilter} from "./mongoDBUtils.js";
+
 export function request(ctx) {
   console.log(`adding object with args ${JSON.stringify(ctx.arguments)}`);
 
@@ -5,20 +7,10 @@ export function request(ctx) {
     method: "POST",
     resourcePath: `${ctx.env.atlasdataapipath}/updateOne`,
     params: {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Request-Headers": "*",
-        "Accept": "application/json",
-        "api-key": ctx.env.mongodbsecret
-      },
+      headers: getDataAPIHeaders(ctx),
       body: {
-        "collection": "Todos",
-        "database": "Integration",
-        "dataSource": "Cluster1",
-        "filter": {
-        "_id": { "$oid": ctx.arguments._id },
-        "username": ctx.identity.username,
-        },
+        ...getConnectionDetails(),
+        "filter": getUserDocumentFilter(ctx),
         "update": {
           "$set": {
             "content": ctx.arguments.content,
