@@ -1,5 +1,4 @@
-import {util} from "@aws-appsync/utils";
-import {getConnectionDetails, getDataAPIHeaders, getUserFilter} from "./mongoDBUtils.js";
+import { util } from "@aws-appsync/utils";
 
 export function request(ctx) {
   console.log(`hello from request`);
@@ -7,10 +6,19 @@ export function request(ctx) {
     method: "POST",
     resourcePath: `${ctx.env.atlasdataapipath}/findOne`,
     params: {
-      headers: getDataAPIHeaders(ctx),
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Request-Headers": "*",
+        "Accept": "application/json",
+        "api-key": ctx.env.mongodbsecret
+      },
       body: {
-        ...getConnectionDetails(),
-        "filter": getUserFilter(ctx),
+        "collection": "Todos",
+        "database":"Integration",
+        "dataSource":"Cluster1",
+        "filter": {
+          "username": ctx.identity.username,
+        },
         "projection": {"_id": 1, "content":1}
       },
     },

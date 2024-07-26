@@ -1,17 +1,22 @@
-import {util} from "@aws-appsync/utils";
-import {getConnectionDetails, getDataAPIHeaders} from "./mongoDBUtils.js";
+import { util } from "@aws-appsync/utils";
 
 export function request(ctx) {
   console.log(`adding object with args ${JSON.stringify(ctx.arguments)}`);
 
-  let connectionDetails = getConnectionDetails();
   return {
     method: "POST",
     resourcePath: `${ctx.env.atlasdataapipath}/insertOne`,
     params: {
-      headers: getDataAPIHeaders(ctx),
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Request-Headers": "*",
+        "Accept": "application/json",
+        "api-key": ctx.env.mongodbsecret
+      },
       body: {
-        ...connectionDetails,
+        "collection": "Todos",
+        "database": "Integration",
+        "dataSource": "Cluster1",
         "document": {
           "content": ctx.arguments.content,
           "username": ctx.identity.username,
