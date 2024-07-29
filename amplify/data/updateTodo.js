@@ -5,16 +5,9 @@ export function request(ctx) {
     method: "POST",
     resourcePath: `${ctx.env.atlasdataapipath}/updateOne`,
     params: {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Request-Headers": "*",
-        "Accept": "application/json",
-        "api-key": ctx.env.mongodbsecret
-      },
+      headers: JSON.parse(ctx.env.dataapiheader),
       body: {
-        "collection": "Todos",
-        "database": "Integration",
-        "dataSource": "Cluster1",
+        ...JSON.parse(ctx.env.clusterdetails),
         "filter": {
         "_id": { "$oid": ctx.arguments._id },
         "username": ctx.identity.username,

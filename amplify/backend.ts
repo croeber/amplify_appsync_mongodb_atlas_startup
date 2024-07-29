@@ -14,6 +14,16 @@ backend.data.addHttpDataSource(
 );
 
 backend.data.resources.cfnResources.cfnGraphqlApi.environmentVariables = {
-  mongodbsecret : process.env.MONGODB_DATA_API_KEY,
   atlasdataapipath: process.env.ATLAS_DATA_API_PATH,
+  dataapiheader: JSON.stringify({
+    "Content-Type": "application/json",
+    "Access-Control-Request-Headers": "*",
+    "Accept": "application/json",
+    "api-key": process.env.MONGODB_DATA_API_KEY
+  }),
+  clusterdetails: JSON.stringify({
+    "collection": "Todos",
+    "database": "Integration",
+    "dataSource": "Cluster1",
+  })
 };

@@ -6,16 +6,9 @@ export function request(ctx) {
     method: "POST",
     resourcePath: `${ctx.env.atlasdataapipath}/findOne`,
     params: {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Request-Headers": "*",
-        "Accept": "application/json",
-        "api-key": ctx.env.mongodbsecret
-      },
+      headers: JSON.parse(ctx.env.dataapiheader),
       body: {
-        "collection": "Todos",
-        "database":"Integration",
-        "dataSource":"Cluster1",
+        ...JSON.parse(ctx.env.clusterdetails),
         "filter": {
           "username": ctx.identity.username,
         },
