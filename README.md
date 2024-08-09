@@ -18,7 +18,7 @@ MongoDB Atlas is a fully managed cloud database service known for its operationa
 
 ## Reference Architecture 
 
-![Reference Architecture](/images/Reference_Architecture.png)
+![Reference Architecture](Images/Reference_Architecture.png)
 
 
 ## Prerequisites
@@ -44,9 +44,9 @@ AWS Account
 
 #### Set up the DATA API with API Key
 
-![Set up Data API](/images/setup_DataAPI.png)
+![Set up Data API](/Images/setup_DataAPI.png)
 
-![Generate API Key](/images/generate_API_KEY.png)
+![Generate API Key](/Images/generate_API_KEY.png)
 
 
 
@@ -70,23 +70,23 @@ Setup the AWS CLI credentials
 Open the AWS Amplify console and Select the Github Option 
 
 
-![GitHub Repo Selection](/images/GitHub.png)
+![GitHub Repo Selection](/Images/GitHub.png)
 
 
 Configure the GitHub Repository
 
-![AWS Amplify GitHub Repo](/images/GitHub_Configuration.png)
+![AWS Amplify GitHub Repo](/Images/GitHub_Configuration.png)
 
 
 Select the GitHub Repository and click Next
 
-![AWS Amplify GitHub Repo](/images/GitHub_Repo_Selection.png)
+![AWS Amplify GitHub Repo](/Images/GitHub_Repo_Selection.png)
 
 
 
 Set all other options to default and deploy
 
-![alt text](/images/amplify_console_overview.png)
+![alt text](/Images/amplify_console_overview.png)
 
 
 #### Configure the Environment Variables
