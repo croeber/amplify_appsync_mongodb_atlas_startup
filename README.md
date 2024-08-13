@@ -7,18 +7,19 @@ This repository provides a starter template for building applications with React
 
 
 ## AWS Amplify
-AWS Amplify is a comprehensive development platform that simplifies the creation of full-stack applications with minimal configuration. It provides a set of tools and services that integrate seamlessly with popular frameworks like React, Angular, and Vue, enabling developers to easily set up scalable backends, manage authentication, and deploy applications with a few simple commands. The 2.0 features of AWS Amplify enhance support for CI/CD workflows, improve the developer experience with the Amplify CLI, and expand capabilities for backend infrastructure as code. These updates facilitate easier management and deployment of cloud resources, integration of serverless functions, and connection to MongoDB Atlas data sources through AWS AppSync and DataAPI, thus significantly reducing the time and effort required to build and scale modern applications
+[AWS Amplify](https://aws.amazon.com/amplify) is a comprehensive development platform that simplifies the creation of full-stack applications with minimal configuration. It provides a set of tools and services that integrate seamlessly with popular frameworks like React, Angular, and Vue, enabling developers to easily set up scalable backends, manage authentication, and deploy applications with a few simple commands. The 2.0 features of AWS Amplify enhance support for CI/CD workflows, improve the developer experience with the Amplify CLI, and expand capabilities for backend infrastructure as code. These updates facilitate easier management and deployment of cloud resources, integration of serverless functions, and connection to MongoDB Atlas data sources through AWS AppSync and DataAPI, thus significantly reducing the time and effort required to build and scale modern applications
 
 ## AWS AppSync
-AWS AppSync is a fully managed service that simplifies the development of GraphQL APIs by automatically handling data fetching, real-time updates, and offline synchronization. It seamlessly integrates with various data sources, including MongoDB Atlas through DataAPI and Drivers, allowing developers to build scalable and flexible applications with ease. AppSync’s features include built-in support for real-time data updates and offline access, reducing the complexity of managing data interactions and enhancing application performance
+[AWS AppSync](https://aws.amazon.com/appsync/) is a fully managed service that simplifies the development of GraphQL APIs by automatically handling data fetching, real-time updates, and offline synchronization. It seamlessly integrates with various data sources, including MongoDB Atlas through DataAPI and Drivers, allowing developers to build scalable and flexible applications with ease. AppSync’s features include built-in support for real-time data updates and offline access, reducing the complexity of managing data interactions and enhancing application performance
 
 ## MongoDB Atlas
 
-MongoDB Atlas is a fully managed cloud database service known for its operational excellence and scalability. It offers advanced features like automated backups, scaling, and monitoring, ensuring high availability and performance. Notably, Atlas includes Vector Search capabilities, which are optimized for Generative AI use cases, enabling efficient search and retrieval of high-dimensional data. This feature enhances the ability to perform complex queries and data analysis, making it ideal for applications requiring sophisticated data interactions and AI-driven insights
+[MongoDB Atlas](https://www.mongodb.com/products/platform/atlas-database) is a fully managed cloud database service known for its operational excellence and scalability. It offers advanced features like automated backups, scaling, and monitoring, ensuring high availability and performance. Notably, Atlas includes Vector Search capabilities, which are optimized for Generative AI use cases, enabling efficient search and retrieval of high-dimensional data. This feature enhances the ability to perform complex queries and data analysis, making it ideal for applications requiring sophisticated data interactions and AI-driven insights
 
 ## Reference Architecture 
 
 ![Reference Architecture](Images/Reference_Architecture.png)
+
 
 
 ## Prerequisites
@@ -41,8 +42,13 @@ AWS Account
 
 #### Set up the MongoDB Atlas cluster
 
+Follow the link to the setup the MongoDB Atlas cluster, Database , User and Network access
+
 
 #### Set up the DATA API with API Key
+
+Follow the link to the setup the Data API
+
 
 ![Set up Data API](/Images/setup_DataAPI.png)
 
