@@ -24,9 +24,9 @@ This repository provides a starter template for building applications with React
 
 ## Prerequisites
 
-MongoDB Atlas
+[MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register)
 
-AWS Account
+[AWS Account](https://aws.amazon.com/free/)
 
 
 ## Features
@@ -42,12 +42,12 @@ AWS Account
 
 #### Set up the MongoDB Atlas cluster
 
-Follow the link to the setup the MongoDB Atlas cluster, Database , User and Network access
+Follow the [link](https://www.mongodb.com/docs/atlas/tutorial/create-atlas-account/) to the setup the [MongoDB Atlas cluster](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/), Database , [User](https://www.mongodb.com/docs/atlas/tutorial/create-mongodb-user-for-cluster/) and [Network access](https://www.mongodb.com/docs/atlas/security/add-ip-address-to-list/)
 
 
 #### Set up the DATA API with API Key
 
-Follow the link to the setup the Data API
+Follow the [link to](https://www.mongodb.com/docs/atlas/app-services/#build-data-driven-apps-and-services) the setup the Data API
 
 
 ![Set up Data API](/Images/setup_DataAPI.png)
@@ -58,15 +58,19 @@ Follow the link to the setup the Data API
 
 ### Step 2
 
-Clone the GitHub Repository
+#### Clone the GitHub Repository
 
 ``` git clone https://github.com/mongodb-partners/amplify_appsync_mongodb_atlas_startup.git```
 
 ### Step 3
 
-Setup the AWS CLI credentials
+#### Setup the AWS CLI credentials
 
-``` aws configure ```
+```
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export AWS_SESSION_TOKEN=
+```
 
 ### Step 4
 
@@ -95,12 +99,16 @@ Set all other options to default and deploy
 ![alt text](/Images/amplify_console_overview.png)
 
 
+### Step 5
+
 #### Configure the Environment Variables
 
 Configure the Environment variables after the successful deployment
 
 ![alt text](/Images/Environment_variables.png)
 
+
+### Step 6
 
 #### open the application and test
 
@@ -115,7 +123,7 @@ MongoDB Atlas Output
 
 
 
-#### Troubleshoot
+### Troubleshoot
 
 In the developer IDE we can create a sandbox environment to test the application code.
 
@@ -143,6 +151,30 @@ Build the Sandbox environment
 
 `npx ampx sandbox`
 
+Sample Output
+
+ ``` 
+ npx ampx sandbox                      
+[Sandbox] Pattern !.vscode/extensions.json found in .gitignore. ".vscode/extensions.json" will not be watched if other patterns in .gitignore are excluding it.
+  
+  Amplify Sandbox
+  
+  Identifier:   babusrinivasan
+  Stack:        amplify-amplifyvitereacttemplate-babusrinivasan-sandbox-db2189c06b
+  
+  To specify a different sandbox identifier, use --identifier
+{"collection":"Todos","database":"Integration","dataSource":"Cluster0"}
+
+
+✨  Synthesis time: 2.17s
+
+⚠️ The --hotswap and --hotswap-fallback flags deliberately introduce CloudFormation drift to speed up deployments
+⚠️ They should only be used for development - never use them for your production Stacks!
+
+......
+.....
+```
+
 On Successful build, open another shell and set the AWS Environment varibales
 
 ```
@@ -155,7 +187,7 @@ Run the Application
 
 `npm run dev`
 
-Output:
+Sample Output:
 
 ```
   VITE v5.2.11  ready in 174 ms
