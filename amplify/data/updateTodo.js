@@ -1,3 +1,4 @@
+// This function handles the request to the data API
 export function request(ctx) {
   console.log(`adding object with args ${JSON.stringify(ctx.arguments)}`);
 
@@ -22,11 +23,22 @@ export function request(ctx) {
   };
 }
 
+// This function handles the response from the data API
 export function response(ctx) {
-	// https://www.mongodb.com/docs/atlas/api/data-api-resources/#response-2
+  // Check if the response status code is 200
   if (ctx.result.statusCode == 200) {
-    return ""
+    return "";
   } else {
-    return  `${JSON.stringify(ctx)}`;
+    return `${JSON.stringify(ctx)}`;
+  }
+}
+
+// This function handles the response from the data API
+export function response(ctx) {
+  // Check if the response status code is 200
+  if (ctx.result.statusCode == 200) {
+    return "";
+  } else {
+    return `${JSON.stringify(ctx)}`;
   }
 }

@@ -1,3 +1,5 @@
+// This function handles the request to delete a todo item
+
 export function request(ctx) {
   console.log(`adding object with args ${JSON.stringify(ctx.arguments)}`);
 
@@ -17,8 +19,10 @@ export function request(ctx) {
   };
 }
 
+// This function handles the response after deleting a todo item
+
 export function response(ctx) {
-	// https://www.mongodb.com/docs/atlas/api/data-api-resources/#response-2
+  // https://www.mongodb.com/docs/atlas/api/data-api-resources/#response-2
   if (ctx.result.statusCode == 200) {
     return "200";
   } else {

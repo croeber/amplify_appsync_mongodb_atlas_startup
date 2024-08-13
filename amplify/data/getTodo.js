@@ -1,5 +1,6 @@
 import { util } from "@aws-appsync/utils";
 
+// This is the request function that is used to make a POST request to the data API
 export function request(ctx) {
   console.log(`hello from request`);
   return {
@@ -18,8 +19,8 @@ export function request(ctx) {
   };
 }
 
+// This is the response function that is used to handle the response from the data API
 export function response(ctx) {
-  
   console.log(`hello from response`);
   if (ctx.error) {
     return util.error(ctx.error.message, ctx.error.type);
