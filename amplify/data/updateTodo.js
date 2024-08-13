@@ -32,13 +32,3 @@ export function response(ctx) {
     return `${JSON.stringify(ctx)}`;
   }
 }
-
-// This function handles the response from the data API
-export function response(ctx) {
-  // Check if the response status code is 200
-  if (ctx.result.statusCode == 200) {
-    return "";
-  } else {
-    return `${JSON.stringify(ctx)}`;
-  }
-}
