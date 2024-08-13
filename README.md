@@ -91,10 +91,80 @@ Set all other options to default and deploy
 
 #### Configure the Environment Variables
 
+Configure the Environment variables after the successful deployment
+
+![alt text](/Images/Environment_variables.png)
+
+
+#### open the application and test
+
+Open the application through the URL provided and test the application.
+
+![alt text](/Images/Applications.png)
+
+
+MongoDB Atlas Output
+
+![alt text](Images/MongoDB.png)
 
 
 
+#### Troubleshoot
 
+In the developer IDE we can create a sandbox environment to test the application code.
+
+Configure the AWS CLI environment
+
+```
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export AWS_SESSION_TOKEN=
+```
+
+Set the enviornment variables for the following
+
+```
+export ATLAS_DATA_API_PATH=
+export MONGODB_DATA_API_KEY=
+export COLLECTION=
+export DATABASE=
+export DATASOURCE=
+export ATLAS_DATA_API_REGIONAL_ENDPOINT=
+
+```
+
+Build the Sandbox environment
+
+`npx ampx sandbox`
+
+On Successful build, open another shell and set the AWS Environment varibales
+
+```
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export AWS_SESSION_TOKEN=
+```
+
+Run the Application 
+
+`npm run dev`
+
+Output:
+
+```
+  VITE v5.2.11  ready in 174 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+
+  ```
+
+Open the webpage on the localhost and test the application.
+
+
+
+## Useful Link
 
 For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/react/start/quickstart/#deploy-a-fullstack-app-to-aws) of our documentation.
 
@@ -103,3 +173,6 @@ For detailed instructions on deploying your application, refer to the [deploymen
 
 ## License
 
+
+## Conclusion
+In conclusion, this GitHub repository provides a comprehensive solution for accelerating application modernization through low-code development with AWS Amplify, AppSync, and MongoDB Atlas. By leveraging the power of these technologies, developers, startups, and business consultants can quickly and efficiently build scalable and performant applications. With pre-configured authentication, API integration, and real-time database capabilities, this starter template simplifies the development process and reduces time to market. Whether you're a seasoned developer or just starting out, this repository is a valuable resource for jumpstarting your projects and leveraging the full potential of AWS services. Start building your next application today!
