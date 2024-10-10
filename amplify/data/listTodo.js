@@ -22,11 +22,11 @@ export function request(ctx) {
 export function response(ctx) {
   console.log(`hello from response`);
   if (ctx.error) {
-    return util.error(ctx.error.message, ctx.error.type);
+    return [util.error(ctx.error.message, ctx.error.type)];
   }
   if (ctx.result.statusCode == 200) {
     return JSON.parse(ctx.result.body).documents;
   } else {
-    return  {id: "id7error", content: `${JSON.stringify(ctx)}`};
+    return  [{id: "id7error", content: `${JSON.stringify(ctx)}`}];
   }
 }
