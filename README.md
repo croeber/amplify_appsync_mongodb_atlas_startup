@@ -45,16 +45,9 @@ This repository provides a starter template for building applications with React
 Follow the [link](https://www.mongodb.com/docs/atlas/tutorial/create-atlas-account/) to the setup the [MongoDB Atlas cluster](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/), Database , [User](https://www.mongodb.com/docs/atlas/tutorial/create-mongodb-user-for-cluster/) and [Network access](https://www.mongodb.com/docs/atlas/security/add-ip-address-to-list/)
 
 
-#### Set up the DATA API with API Key
+#### Set up the user
 
-Follow the [link to](https://www.mongodb.com/docs/atlas/app-services/#build-data-driven-apps-and-services) the setup the Data API
-
-
-![Set up Data API](/Images/setup_DataAPI.png)
-
-![Generate API Key](/Images/generate_API_KEY.png)
-
-
+* [Configure User](https://www.mongodb.com/docs/atlas/security-add-mongodb-users/)
 
 ### Step 2
 
@@ -138,12 +131,9 @@ export AWS_SESSION_TOKEN=
 Set the enviornment variables for the following
 
 ```
-export ATLAS_DATA_API_PATH=
-export MONGODB_DATA_API_KEY=
-export COLLECTION=
-export DATABASE=
-export DATASOURCE=
-export ATLAS_DATA_API_REGIONAL_ENDPOINT=
+export DB_NAME=
+export COLLECTION_NAME=
+export ATLAS_CONNECTION_STRING=
 
 ```
 
