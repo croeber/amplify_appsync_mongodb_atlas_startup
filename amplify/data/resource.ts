@@ -1,86 +1,96 @@
-import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+import { type ClientSchema, a, defineData, defineFunction } from "@aws-amplify/backend";
 
-// Define the schema for the data
+const envValues = {
+    ATLAS_CONNECTION_STRING: process.env.ATLAS_CONNECTION_STRING!,
+    COLLECTION_NAME: process.env.COLLECTION_NAME!,
+    DB_NAME: process.env.DB_NAME!
+};
+const listTodoHandler = defineFunction({
+  entry: './listTodo.ts',
+  environment: {
+      ...envValues,
+  }
+});
+
+const addTodoHandler = defineFunction({
+  entry: './addTodo.ts',
+  environment: {
+      ...envValues,
+  }
+});
+
+const deleteTodoHandler = defineFunction({
+  entry: './deleteTodo.ts',
+  environment: {
+      ...envValues,
+  }
+});
+
+const updateTodoHandler = defineFunction({
+  entry: './updateTodo.ts',
+  environment: {
+      ...envValues,
+  }
+});
+
 const schema = a.schema({
   Todo: a.customType({
-    _id: a.id().required(),
-    content: a.string().required(),
+      _id: a.id().required(),
+      content: a.string().required(),
+    }),
+  ListTodoResponse: a.customType({
+    statusCode:a.string(),
+    todoList:a.ref("Todo").array(),
   }),
-
-  // Define the addTodo mutation
+  AddTodoResponse: a.customType({
+    statusCode:a.string(),
+    todo:a.ref("Todo"),
+  }),
+  DeleteTodoResponse: a.customType({
+    statusCode:a.string(),
+    count:a.string(),
+  }),
+  UpdatedTodoResponse: a.customType({
+    statusCode:a.string(),
+    count:a.string(),
+  }),
   addTodo: a
     .mutation()
     .arguments({
-      id: a.id(),
+      _id: a.id(),
       content: a.string().required(),
     })
-    .returns(a.ref("Todo"))
+    .returns(a.ref("AddTodoResponse"))
     .authorization(allow => [allow.authenticated()])
-    .handler(
-      a.handler.custom({
-        dataSource: "MyMongoDBDataSource",
-        entry: "./addTodo.js",
-      })
-    ),
-
-  // Define the getTodo query
-  getTodo: a
-    .query()
-    .arguments({ id: a.id().required() })
-    .returns(a.ref("Todo"))
-    .authorization(allow => [allow.authenticated()])
-    .handler(
-      a.handler.custom({
-        dataSource: "MyMongoDBDataSource",
-        entry: "./getTodo.js",
-      })
-    ),
-
-  // Define the listTodo query
+    .handler(a.handler.function(addTodoHandler)),
   listTodo: a
     .query()
-    .returns(a.ref("Todo").array())
+    .returns(a.ref("ListTodoResponse"))
     .authorization(allow => [allow.authenticated()])
-    .handler(
-      a.handler.custom({
-        dataSource: "MyMongoDBDataSource",
-        entry: "./listTodo.js",
-      })
-    ),
-
-  // Define the deleteTodo mutation
+    .handler(a.handler.function(listTodoHandler)),
   deleteTodo: a
     .mutation()
     .arguments({
-      id: a.string().required(),
+      _id: a.string().required(),
     })
-    .returns(a.string())
+    .returns(a.ref("DeleteTodoResponse"))
     .authorization(allow => [allow.authenticated()])
     .handler(
-      a.handler.custom({
-        dataSource: "MyMongoDBDataSource",
-        entry: "./deleteTodo.js",
-      })
+      a.handler.function(deleteTodoHandler)
     ),
-
-  // Define the updateTodo mutation
   updateTodo: a
     .mutation()
     .arguments({
       _id: a.string().required(),
       content: a.string().required(),
     })
-    .returns(a.string())
+    .returns(a.ref("UpdatedTodoResponse"))
     .authorization(allow => [allow.authenticated()])
     .handler(
-      a.handler.custom({
-        dataSource: "MyMongoDBDataSource",
-        entry: "./updateTodo.js",
-      })
+      a.handler.function(updateTodoHandler)
     ),
-});
 
-// This code defines the schema and data for the Amplify AppSync MongoDB Atlas startup
+});
 
 export type Schema = ClientSchema<typeof schema>;
 
