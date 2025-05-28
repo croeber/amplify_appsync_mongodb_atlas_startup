@@ -7,20 +7,20 @@ const client = generateClient<Schema>();
 
 function App() {
   // type Todo = Schema["addTodo"]['returnType']['todo'];
-  type Todo = any;
-  const [todos, setTodos] = useState<Todo[]>([]);
+  type User = any;
+  const [users, setUsers] = useState<User[]>([]);
 
-  const fetchTodos = async () => {
+  const fetchUsers = async () => {
     const { data } = await client.queries.listUsers();
 
     if (data?.statusCode === "200")
-          setTodos(data.body!)
+      setUsers(data.body!)
     else
       alert("Failed to load Todos");
 
   }
 
-  useEffect(() => { fetchTodos() }, []);
+  useEffect(() => { fetchUsers() }, []);
 
 
   const createTodo = async() => {
@@ -29,15 +29,26 @@ function App() {
 
     const res = await client.mutations.createUser({ duz: '100000032', vista: 'DEVMIAVREDV04', permissions: []});
     if (res.data?.statusCode != "200")
-      alert("Failed to create todo");
+      alert("Failed to create");
     
-    fetchTodos()
+    fetchUsers()
   }
 
   return (
       <main>
         <h1>My todos</h1>
         <button onClick={createTodo}>+ new</button>
+        <ul>
+          {users.map((item) => {
+            if (!item) return null;
+            return (
+              <li key={item._id}> 
+                {item.duz}
+              </li>
+              
+            )
+          })}
+        </ul>
         <div>
           🥳 App successfully hosted. Try creating a new todo.
           <br />
