@@ -34,27 +34,10 @@ function App() {
     fetchTodos()
   }
 
-  const updateTodo = async(todo: Todo) => { 
-  }
-
-  async function deleteTodo(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) { 
-  }
-
   return (
       <main>
         <h1>My todos</h1>
         <button onClick={createTodo}>+ new</button>
-        <ul>
-          {todos.map((todo) => {
-            if (!todo) return null;
-            return (
-              <li onClick={() => updateTodo(todo)} key={todo._id}> 
-                <button onClick={(event) => deleteTodo(event, todo._id)}>x</button> {todo.content}
-              </li>
-              
-            )
-          })}
-        </ul>
         <div>
           🥳 App successfully hosted. Try creating a new todo.
           <br />
