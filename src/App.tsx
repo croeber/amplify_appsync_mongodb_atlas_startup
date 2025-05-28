@@ -13,7 +13,7 @@ function App() {
   const fetchUsers = async () => {
     const { data } = await client.queries.listUsers({
       headers:{
-        'x-api-key': 'da2-gyri722x5fbebmaotuimqxtjai',
+        'Authorization': 'da2-gyri722x5fbebmaotuimqxtjai',
       }
     });
 
