@@ -11,7 +11,11 @@ function App() {
   const [users, setUsers] = useState<User[]>([]);
 
   const fetchUsers = async () => {
-    const { data } = await client.queries.listUsers();
+    const { data } = await client.queries.listUsers({
+      headers:{
+        Authorization: 'Bearer da2-gyri722x5fbebmaotuimqxtjai'
+      }
+    });
 
     if (data?.statusCode === "200")
       setUsers(data.body!)
