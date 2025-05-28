@@ -1,95 +1,67 @@
-import { type ClientSchema, a, defineData, defineFunction } from "@aws-amplify/backend";
+import {
+  type ClientSchema,
+  a,
+  defineData,
+  defineFunction,
+} from "@aws-amplify/backend";
 
 const envValues = {
-    ATLAS_CONNECTION_STRING: process.env.ATLAS_CONNECTION_STRING!,
-    COLLECTION_NAME: process.env.COLLECTION_NAME!,
-    DB_NAME: process.env.DB_NAME!
+  ATLAS_CONNECTION_STRING: process.env.ATLAS_CONNECTION_STRING!,
 };
-const listTodoHandler = defineFunction({
-  entry: './listTodo.ts',
+
+const createUserHandler = defineFunction({
+  entry: "./createUser.ts",
   environment: {
-      ...envValues,
-  }
+    ...envValues,
+  },
 });
 
-const addTodoHandler = defineFunction({
-  entry: './addTodo.ts',
-  environment: {
-      ...envValues,
-  }
-});
 
-const deleteTodoHandler = defineFunction({
-  entry: './deleteTodo.ts',
+const listUsersHandlers = defineFunction({
+  entry: "./listUsers.ts",
   environment: {
-      ...envValues,
-  }
-});
-
-const updateTodoHandler = defineFunction({
-  entry: './updateTodo.ts',
-  environment: {
-      ...envValues,
-  }
+    ...envValues,
+  },
 });
 
 const schema = a.schema({
-  Todo: a.customType({
-      _id: a.id().required(),
-      content: a.string().required(),
-    }),
-  ListTodoResponse: a.customType({
-    statusCode:a.string(),
-    todoList:a.ref("Todo").array(),
+  Permission: a.customType({
+    _id: a.string().required(),
+    code: a.integer().required(),
+    name: a.string().required(),
+    active: a.boolean().required(),
   }),
-  AddTodoResponse: a.customType({
-    statusCode:a.string(),
-    todo:a.ref("Todo"),
+  User: a.customType({
+    _id: a.string().required(),
+    duz: a.string().required(),
+    vista: a.string().required(),
+    active: a.boolean().required(),
+    permissions: a.ref("Permission").array(),
   }),
-  DeleteTodoResponse: a.customType({
-    statusCode:a.string(),
-    count:a.string(),
+  CreateUserResponse: a.customType({
+    statusCode: a.string(),
+    body: a.ref("User"),
   }),
-  UpdatedTodoResponse: a.customType({
-    statusCode:a.string(),
-    count:a.string(),
-  }),
-  addTodo: a
+  createUser: a
     .mutation()
     .arguments({
-      _id: a.id(),
-      content: a.string().required(),
+      duz: a.string().required(),
+      vista: a.string().required(),
+      permissions: a.ref('Permission').array().required(),
     })
-    .returns(a.ref("AddTodoResponse"))
-    .authorization(allow => [allow.authenticated()])
-    .handler(a.handler.function(addTodoHandler)),
-  listTodo: a
+    .returns(a.ref("CreateUserResponse"))
+    .authorization((allow) => [allow.guest()])
+    .handler(a.handler.function(createUserHandler)),
+    
+  ListUsersResponse: a.customType({
+    statusCode: a.string(),
+    body: a.ref("User").array(),
+  }),
+  listUsers: a
     .query()
-    .returns(a.ref("ListTodoResponse"))
-    .authorization(allow => [allow.authenticated()])
-    .handler(a.handler.function(listTodoHandler)),
-  deleteTodo: a
-    .mutation()
-    .arguments({
-      _id: a.string().required(),
-    })
-    .returns(a.ref("DeleteTodoResponse"))
-    .authorization(allow => [allow.authenticated()])
-    .handler(
-      a.handler.function(deleteTodoHandler)
-    ),
-  updateTodo: a
-    .mutation()
-    .arguments({
-      _id: a.string().required(),
-      content: a.string().required(),
-    })
-    .returns(a.ref("UpdatedTodoResponse"))
-    .authorization(allow => [allow.authenticated()])
-    .handler(
-      a.handler.function(updateTodoHandler)
-    ),
-
+    .returns(a.ref("ListUsersResponse"))
+    .authorization((allow) => [allow.guest()])
+    .handler(a.handler.function(listUsersHandlers)),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -97,7 +69,7 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "userPool",
+    defaultAuthorizationMode: "apiKey",
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
     },

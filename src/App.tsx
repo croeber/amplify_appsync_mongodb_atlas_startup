@@ -12,10 +12,10 @@ function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const fetchTodos = async () => {
-    const { data } = await client.queries.listTodo();
+    const { data } = await client.queries.listUsers();
 
     if (data?.statusCode === "200")
-          setTodos(data.todoList!)
+          setTodos(data.body!)
     else
       alert("Failed to load Todos");
 
@@ -28,36 +28,17 @@ function App() {
     const itemContent = window.prompt("Todo content");
     if (!itemContent) return;
 
-    const res = await client.mutations.addTodo({ content: itemContent});
+    const res = await client.mutations.createUser({ duz: '100000032', vista: 'DEVMIAVREDV04', permissions: []});
     if (res.data?.statusCode != "200")
       alert("Failed to create todo");
     
     fetchTodos()
   }
 
-  const updateTodo = async(todo: Todo) => {
-    if (!todo) return;
-
-    const itemContent = window.prompt("Todo content", todo?.content);
-    if (!itemContent) return;
-    
-    const updatedTodo:Todo = {...todo, content: itemContent };
-
-    const res = await client.mutations.updateTodo({...updatedTodo});
-    
-    if (res.data?.statusCode != "200")
-      alert("Failed to update todo");
-
-    fetchTodos()
+  const updateTodo = async(todo: Todo) => { 
   }
 
-  async function deleteTodo(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) {
-    e.stopPropagation();
-    const res = await client.mutations.deleteTodo({ _id: id });
-    if (res.data?.statusCode != "200")
-      alert("Failed to delete todo");
-
-    fetchTodos()
+  async function deleteTodo(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) { 
   }
 
   return (
