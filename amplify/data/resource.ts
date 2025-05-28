@@ -50,6 +50,7 @@ const schema = a.schema({
       permissions: a.ref('Permission').array().required(),
     })
     .returns(a.ref("CreateUserResponse"))
+    .authorization((allow) => [allow.publicApiKey()])
     .handler(a.handler.function(createUserHandler)),
     
   ListUsersResponse: a.customType({
@@ -59,6 +60,7 @@ const schema = a.schema({
   listUsers: a
     .query()
     .returns(a.ref("ListUsersResponse"))
+    .authorization((allow) => [allow.publicApiKey()])
     .handler(a.handler.function(listUsersHandlers)),
 });
 
